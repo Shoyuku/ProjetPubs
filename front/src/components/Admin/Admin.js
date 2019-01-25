@@ -1,11 +1,27 @@
 import React, { Component } from 'react';
+import API from '../../utils/API.js';
 
 class Admin extends Component {
 
+  state = {
+    authors: "",
+  }
 
+  constructor(props){
+    super(props);
+    this.init();
+  }
 
+  init(){
+    API.get_authors().then((data) => console.log(data.data));
+    API.get_employees().then((data) => console.log(data.data));
+    API.get_publishers().then((data) => console.log(data.data));
+    API.get_stores().then((data) => console.log(data.data));
+    API.get_titles().then((data) => console.log(data.data));
+  }
 
   render() {
+    const {authors} = this.state;
     return (
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark static-top">
@@ -36,7 +52,7 @@ class Admin extends Component {
           </ul>
         </div>
 
-        
+        <a>{authors}</a>
       </div>
     );
   }

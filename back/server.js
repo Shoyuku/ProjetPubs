@@ -38,8 +38,33 @@ app.get('/hello',function(req,res){
 
 //Définition du routeur
 var router = express.Router();
-app.use('/user', router);
-require(__dirname + '/controllers/userController')(router);
+
+app.use('/author', router);
+require(__dirname + '/controllers/authorController')(router);
+
+app.use('/employee', router);
+require(__dirname + '/controllers/employeeController')(router);
+
+app.use('/publisher', router);
+require(__dirname + '/controllers/publisherController')(router);
+
+app.use('/store', router);
+require(__dirname + '/controllers/storeController')(router);
+
+app.use('/title', router);
+require(__dirname + '/controllers/titleController')(router);
+
+/*const Author = require('./schema/schemaAuthor.js');
+app.use('/author',router);
+router.route('/get_authors').get(function(req, res) {
+    Author.find(function(err, author) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(author);
+        }
+    });
+});*/
 
 //Définition et mise en place du port d'écoute
 var port = 8000;
