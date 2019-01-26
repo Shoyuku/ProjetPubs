@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const jwt = require('jwt-simple');
-const config = require('../config/config');
 
 var authorSchema = mongoose.Schema({
 	au_id: {

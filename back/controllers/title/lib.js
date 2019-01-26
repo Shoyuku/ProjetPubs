@@ -6,7 +6,7 @@ function get_titles(req, res) {
             console.log(err)
         }
         else{
-            res.json(titles)
+            res.status(200).json(titles)
         }
     })
 }
