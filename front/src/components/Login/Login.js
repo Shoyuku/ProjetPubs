@@ -17,13 +17,13 @@ class Login extends Component {
         event.preventDefault();
         const { username } = this.state;
         if (username === "Admin") {
-            this.props.history.push("/admin");
+            this.props.history.push("/mainpage/admin");
         }
         else if (username === "Analyst") {
-            this.props.history.push("/analyst");
+            this.props.history.push("/mainpage/analyst");
         }
         else {
-            this.props.history.push("/user");
+            this.props.history.push("/mainpage/user");
         }
     }
 

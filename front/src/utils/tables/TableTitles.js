@@ -50,6 +50,7 @@ class TableTitles extends Component {
                             }
                         ]}
                         defaultPageSize={5}
+                        filterable
                         className="-striped -highlight datatable"
                         SubComponent={row => {
                             return (

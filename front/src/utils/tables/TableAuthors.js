@@ -10,7 +10,7 @@ class TableAuthors extends Component {
     return (
       <div className="row">
         <div className="col">
-          <h3>Auteurs</h3>
+          <h3>Authors</h3>
           <ReactTable
             data={authors}
             columns={[
@@ -59,6 +59,7 @@ class TableAuthors extends Component {
               }
             ]}
             defaultPageSize={5}
+            filterable
             className="-striped -highlight datatable"
           />
         </div>

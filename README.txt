@@ -1,3 +1,5 @@
+Pré-requis : Avoir installer Nodejs
+
 1. Ouvrir l'invite de commande et aller dans le dossier ./back
 
 2. Taper npm i dans l'invite de commande et attendre la fin de l'installation

@@ -47,6 +47,7 @@ class TablePublishers extends Component {
                             }
                         ]}
                         defaultPageSize={5}
+                        filterable
                         className="-striped -highlight datatable"
                     />
                 </div>

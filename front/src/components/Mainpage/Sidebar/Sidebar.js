@@ -22,7 +22,7 @@ class Sidebar extends Component {
         this.init(this.props.location.pathname)
     }
 
-    init(path){
+    init(path){ // permet d'initialiser la sidebar selon la vue
         let array = [];
         if(path.includes("admin")){
             array.push(new SidebarItem("Informations base","/mainpage/admin/all"));
@@ -30,15 +30,16 @@ class Sidebar extends Component {
             this.setState({items: array});            
         }
         else if(path.includes("analyst")){
-            array.push(new SidebarItem("Requête 1","/mainpage/analyst"));
-            array.push(new SidebarItem("Requête 2","/mainpage/analyst"));
+            array.push(new SidebarItem("Requête 1","/mainpage/analyst/1"));
+            array.push(new SidebarItem("Requête 2","/mainpage/analyst/2"));
             this.setState({items: array});
         }
         else{
-            array.push(new SidebarItem("Requête 1","/mainpage/user"));
-            array.push(new SidebarItem("Requête 2","/mainpage/user"));
-            array.push(new SidebarItem("Requête 3","/mainpage/user"));
-            array.push(new SidebarItem("Requête 4","/mainpage/user"));
+            array.push(new SidebarItem("Informations base","/mainpage/user/all"));
+            array.push(new SidebarItem("Requête 1","/mainpage/user/1"));
+            array.push(new SidebarItem("Requête 2","/mainpage/user/2"));
+            array.push(new SidebarItem("Requête 3","/mainpage/user/3"));
+            array.push(new SidebarItem("Requête 4","/mainpage/user/4"));
             this.setState({items: array});
         }
     }

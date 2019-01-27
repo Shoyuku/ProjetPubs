@@ -10,13 +10,9 @@ class Bandeau extends Component {
 	state = {
 		title: localStorage.getItem("title"),
     };
-
-    constructor(props){
-        super(props);
-    }
     
-	componentDidMount(){
-        this.setState({title: localStorage.getItem("title")});
+	componentDidMount(){ 
+        this.setState({title: localStorage.getItem("title")}); // modifie le titre du bandeau
     }
     
 	redirectToLogin = () => {

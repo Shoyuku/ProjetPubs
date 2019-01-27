@@ -10,7 +10,7 @@ class TableEmployees extends Component {
         return (
             <div className="row">
                 <div className="col">
-                    <h3>Employées</h3>
+                    <h3>Employees</h3>
                     <ReactTable
                         data={employees}
                         columns={[
@@ -47,6 +47,7 @@ class TableEmployees extends Component {
                             }
                         ]}
                         defaultPageSize={5}
+                        filterable
                         className="-striped -highlight datatable"
                     />
                 </div>

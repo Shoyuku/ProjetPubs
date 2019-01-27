@@ -44,7 +44,7 @@ class Admin extends Component {
           <Switch>
             <Route path={`${this.props.match.url}/all`} render={() => <AllTables authors={authors} employees={employees} publishers={publishers} stores={stores} titles={titles}/>}/>
             <Route path={`${this.props.match.url}/charts`}  render={() => <Charts />}/>
-          </Switch>          
+          </Switch>
         </div>
     );
   }

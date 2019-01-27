@@ -5,6 +5,7 @@ const headers = {
 const burl = "http://localhost:8000"
 
 export default {
+    // get all data from database
     get_authors : function() {
         return axios.get(burl + '/author/get_authors',{},{
             headers: headers
@@ -30,14 +31,25 @@ export default {
             headers: headers
         })
     },
-    signup : function(send){
-        return axios.post(burl + '/user/signup',send,{headers: headers})
+    // queries
+    get_book_sales_per_author : function() {
+        return axios.get(burl + '/title/get_book_sales_per_author',{},{
+            headers: headers
+        })
     },
-    
-    isAuth : function() {
-        return (localStorage.getItem('token') !== null);
+    get_book_per_author : function() {
+        return axios.get(burl + '/title/get_book_per_author',{},{
+            headers: headers
+        })
     },
-    logout : function() {
-        localStorage.clear();
-    }
+    get_sales_per_book : function() {
+        return axios.get(burl + '/title/get_sales_per_book',{},{
+            headers: headers
+        })
+    },
+    get_sales_per_publishers : function() {
+        return axios.get(burl + '/title/get_sales_per_publisher',{},{
+            headers: headers
+        })
+    },
 }
