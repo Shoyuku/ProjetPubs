@@ -38,7 +38,7 @@ class Login extends Component {
         return (
             <div className="login">
                 
-            <div className="container">
+            <div className="container login-container">
                 <div className="card card-login mx-auto mt-5">
                     <div className="card-header">Login</div>
                     <div className="card-body">
@@ -51,6 +51,7 @@ class Login extends Component {
                             <button className="btn btn-primary btn-block" type="submit">Login</button>
                         </form>
                         <div className = "login-content-button">
+                            <h2 style={{marginBottom:"50px"}}>Cliquez pour vous connecter !</h2>
                             <Button className="login-button" variant="contained" color="primary" onClick={() => this.redirectTo("/mainpage/admin/all")}>Admin</Button>
                             <Button className="login-button" variant="contained" color="secondary" onClick={() => this.redirectTo("/mainpage/analyst/all")}>Analyst</Button>
                             <Button className="login-button" variant="contained" color="primary" onClick={() => this.redirectTo("/mainpage/user/all")}>User</Button>

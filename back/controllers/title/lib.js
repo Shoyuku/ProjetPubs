@@ -11,8 +11,8 @@ function get_titles(req, res) { // get all titles
     })
 }
 
+// INTERROGATIONS LEGERES
 function get_book_sales_per_author(req, res) { // 1 get the author whom its books has been sold the most by year
-
     opUnwind = { $unwind: "$Titleauthor" };
     opLookUp =
         {
@@ -33,7 +33,6 @@ function get_book_sales_per_author(req, res) { // 1 get the author whom its book
 }
 
 function get_book_per_author(req, res) { // 2 get all books by author
-
     opUnwind = { $unwind: "$Titleauthor" };
     opLookUp =
         {
@@ -88,6 +87,48 @@ function get_sales_per_publisher(req, res) { // 4 get the number of book sales b
     });
 }
 
+//INTERROGATIONS LOURDES
+function get_list_employees(req, res) { // 1 get the list of employees from a book publisher
+    opProject1 = { $project: { "title": 1, "title_id": 1, "pub_id": 1 } };
+
+    opLookUp1 =
+        {
+            $lookup:
+            {
+                from: 'publishers',
+                localField: 'pub_id',
+                foreignField: 'pub_id',
+                as: 'publisher_info'
+            }
+        };
+
+    opLookUp2 =
+        {
+            $lookup:
+            {
+                from: 'employees',
+                localField: 'pub_id',
+                foreignField: 'pub_id',
+                as: 'list_employees'
+            }
+        };
+
+    opProject2 = {
+        $project: {
+            "title": 1, "title_id": 1, "publisher_info.pub_name": 1,
+            "list_employees.emp_id": 1,
+            "list_employees.fname": 1,
+            "list_employees.lname": 1,
+            "list_employees.Jobs.job_id": 1,
+            "list_employees.Jobs.job_desc": 1
+        }
+    };
+
+    Title.aggregate([opProject1, opLookUp1, opLookUp2, opProject2], function (err, result) {
+        res.status(200).json(result)
+    });
+}
+
 function get_range_per_author(req, res) { // 2 get the book price range for each author by stores
     var o = {};
     self = this;
@@ -109,7 +150,7 @@ function get_range_per_author(req, res) { // 2 get the book price range for each
         }
         return { "min": min, "max": max };
     };
-    o.out = { inline:1 };
+    o.out = { inline: 1 };
     o.verbose = true;
 
     Title.mapReduce(o, function (err, result) {
@@ -120,46 +161,21 @@ function get_range_per_author(req, res) { // 2 get the book price range for each
     });
 }
 
-function get_list_employees(req, res){
-    opProject1 = {$project: {"title":1, "title_id":1, "pub_id":1}};
 
-    
-    opLookUp1 = 
-        { $lookup:
-        {
-            from: 'publishers',
-            localField: 'pub_id',
-            foreignField: 'pub_id',
-            as: 'publisher_info'
-        }
-    };
+function get_type_by_sales(req, res) {
+    opGroup = { $group: { _id: "$type", "tot":{$sum:"$ytd_sales"} } };
 
-    opLookUp2 =  
-        { $lookup:
-        {
-            from: 'employees',
-            localField: 'pub_id',
-            foreignField: 'pub_id',
-            as: 'list_employees'
-        }
-    };
-        
-    opProject2 = {$project: {"title":1, "title_id":1, "publisher_info.pub_name":1, 
-        "list_employees.emp_id":1, 
-        "list_employees.fname":1, 
-        "list_employees.lname":1,
-        "list_employees.Jobs.job_id":1, 
-        "list_employees.Jobs.job_desc":1}};
-        
-    Title.aggregate([opProject1, opLookUp1, opLookUp2, opProject2], function(err, result){
+    Title.aggregate([opGroup], function (err, result) {
         res.status(200).json(result)
     });
 }
+
 
 exports.get_titles = get_titles;
 exports.get_book_per_author = get_book_per_author;
 exports.get_book_sales_per_author = get_book_sales_per_author;
 exports.get_sales_per_book = get_sales_per_book;
 exports.get_sales_per_publisher = get_sales_per_publisher;
-exports.get_range_per_author = get_range_per_author;
 exports.get_list_employees = get_list_employees;
+exports.get_range_per_author = get_range_per_author;
+exports.get_type_by_sales = get_type_by_sales;

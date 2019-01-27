@@ -62,4 +62,9 @@ export default {
             headers: headers
         })
     },
+    get_type_by_sales : function() {
+        return axios.get(burl + '/title/get_type_by_sales',{},{
+            headers: headers
+        })
+    },
 }

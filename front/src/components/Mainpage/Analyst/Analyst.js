@@ -4,6 +4,7 @@ import Analyst1 from './Analyst1';
 import Analyst2 from './Analyst2';
 import API from '../../../utils/API.js';
 import AllTables from '../../../utils/AllTables.js';
+import AnalystCharts from './AnalystChart';
 
 class Analyst extends Component {
 
@@ -40,6 +41,7 @@ class Analyst extends Component {
         <div id="wrapper">
           <Switch>
             <Route path={`${this.props.match.url}/all`} render={() => <AllTables authors={authors} employees={employees} publishers={publishers} stores={stores} titles={titles}/>}/>
+            <Route path={`${this.props.match.url}/charts`}  render={() => <AnalystCharts />}/>
             <Route path={`${this.props.match.url}/1`}  render={() => <Analyst1 />}/>
             <Route path={`${this.props.match.url}/2`}  render={() => <Analyst2 />}/>
           </Switch>
