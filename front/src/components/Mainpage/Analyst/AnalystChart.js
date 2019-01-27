@@ -1,53 +1,30 @@
 import React, { Component } from 'react';
-import { Line,Bar } from 'react-chartjs-2';
+import { Bar,Doughnut } from 'react-chartjs-2';
 import API from '../../../utils/API.js';
 
-const line_data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [
-        {
-            label: 'My First dataset',
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: 'rgba(75,192,192,0.4)',
-            borderColor: 'rgba(75,192,192,1)',
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: 'rgba(75,192,192,1)',
-            pointBackgroundColor: '#fff',
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-            pointHoverBorderColor: 'rgba(220,220,220,1)',
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
-            data: [65, 59, 80, 81, 56, 55, 40]
-        }
-    ]
+const data = {
+	labels: ['Red','Green','Yellow'],
+	datasets: [{
+		data: [300, 50, 100],
+		backgroundColor: [
+		'#FF6384',
+		'#36A2EB',
+		'#FFCE56'
+		],
+		hoverBackgroundColor: [
+		'#FF6384',
+		'#36A2EB',
+		'#FFCE56'
+		]
+	}]
 };
-
-const bar_data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [
-      {
-        label: 'My First dataset',
-        backgroundColor: 'rgba(255,99,132,0.2)',
-        borderColor: 'rgba(255,99,132,1)',
-        borderWidth: 1,
-        hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-        hoverBorderColor: 'rgba(255,99,132,1)',
-        data: [65, 59, 80, 81, 56, 55, 40]
-      }
-    ]
-  };
 
 class AnalystCharts extends Component {
 
     state = {
         data: [],
+        bar_data: {},
+        doughnut_data: {},
     }
 
     constructor(props) {
@@ -55,11 +32,88 @@ class AnalystCharts extends Component {
     }
 
     componentDidMount() {
-      this.init();
+        this.init();
     }
-  
+
     init() { // récupération de toutes les données
-      API.get_type_by_sales().then((data) => { console.log(data.data);this.setState({ data: data.data }) });
+        API.get_type_by_sales().then((data) => { this.setBarData(data.data) });
+        API.get_type_total().then((data) => { this.setDoughnutData(data.data.results) });
+    }
+
+    setBarData(data) {
+        let labels = [];
+        let bar_data = [];
+
+        for (let i of data) {
+            labels.push(i._id);
+            bar_data.push(i.tot);
+        }
+
+        let tmp = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Nombre de ventes',
+                    backgroundColor: 'rgba(255,99,132,0.2)',
+                    borderColor: 'rgba(255,99,132,1)',
+                    borderWidth: 1,
+                    hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+                    hoverBorderColor: 'rgba(255,99,132,1)',
+                    data: bar_data
+                }
+            ]
+        };
+        this.setState({bar_data: tmp});
+    }
+
+    generateBarChart(){
+        let table = [];
+        if(this.state.bar_data.labels)
+        {
+            table.push(<Bar data={this.state.bar_data} key={0}/>);
+        }
+        return table;
+    }
+
+    setDoughnutData(data) {
+        let labels = [];
+        let array = [];
+
+        for (let i of data) {
+            labels.push(i._id);
+            array.push(i.value.tot);
+        }
+
+        let tmp = {
+            labels: labels,
+            datasets: [{
+                data: array,
+                backgroundColor: [
+                '#FF6384',
+                '#36A2EB',
+                '#FFCE56',
+                '#70C179',
+                '#9F5561'
+                ],
+                hoverBackgroundColor: [
+                '#FF6384',
+                '#36A2EB',
+                '#FFCE56',
+                '#70C179',
+                '#9F5561'
+                ]
+            }]
+        };
+        this.setState({doughnut_data: tmp});
+    }
+
+    generateDoughnutChart(){
+        let table = [];
+        if(this.state.doughnut_data.labels)
+        {
+            table.push(<Doughnut  data={this.state.doughnut_data} key={0}/>);
+        }
+        return table;
     }
 
     render() {
@@ -67,8 +121,14 @@ class AnalystCharts extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col">
-                        <h3>Taille moyenne d’un nouvel élément dans la base de données</h3>
-                        <Bar data={bar_data} />
+                        <h3>Nombre de ventes par type de livre</h3>
+                        {
+                            this.generateBarChart()
+                        }
+                        <h3>Nombre de livre par catégorie</h3>
+                        {
+                            this.generateDoughnutChart()
+                        }
                     </div>
                 </div>
             </div>

@@ -67,4 +67,9 @@ export default {
             headers: headers
         })
     },
+    get_type_total : function() {
+        return axios.get(burl + '/title/get_type_total',{},{
+            headers: headers
+        })
+    },
 }

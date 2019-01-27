@@ -20,7 +20,7 @@ class User2 extends Component {
     }
 
     init() { // récupération de toutes les données
-        API.get_book_per_author().then((data) => { this.setState({ data: data.data }) });
+        API.get_book_per_author().then((data) => { console.log(data);this.setState({ data: data.data }) });
     }
 
     render() {

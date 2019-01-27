@@ -9,4 +9,5 @@ module.exports = function (app) {
     app.get('/get_list_employees', title.get_list_employees);
     app.get('/get_range_per_author', title.get_range_per_author);
     app.get('/get_type_by_sales', title.get_type_by_sales);
+    app.get('/get_type_total', title.get_type_total);
 }

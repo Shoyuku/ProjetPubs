@@ -6,6 +6,10 @@ import User2 from './User2.js'
 import User3 from './User3.js'
 import User4 from './User4.js'
 import { Route, Switch, withRouter } from 'react-router-dom';
+import TableAuthors from '../../../utils/tables/TableAuthors';
+import TablePublishers from '../../../utils/tables/TablePublishers';
+import TableStores from '../../../utils/tables/TableStores';
+import TableTitles from '../../../utils/tables/TableTitles';
 
 class User extends Component {
 
@@ -43,7 +47,7 @@ class User extends Component {
 
         <div id="wrapper">
           <Switch>
-            <Route path={`${this.props.match.url}/all`} render={() => <AllTables authors={authors} employees={employees} publishers={publishers} stores={stores} titles={titles}/>}/>
+            <Route path={`${this.props.match.url}/all`} render={() =><div><TableAuthors authors={authors} /> <TablePublishers publishers={publishers}/> <TableStores stores={stores} /> <TableTitles titles={titles} /> </div> }/>
             <Route path={`${this.props.match.url}/1`}  render={() => <User1 />}/>
             <Route path={`${this.props.match.url}/2`}  render={() => <User2 />}/>
             <Route path={`${this.props.match.url}/3`}  render={() => <User3 />}/>

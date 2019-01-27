@@ -162,8 +162,8 @@ function get_range_per_author(req, res) { // 2 get the book price range for each
     });
 }
 
-
-function get_type_by_sales(req, res) {
+// ANALYST CHARTS
+function get_type_by_sales(req, res) { // get data on the number of sales
     opGroup = { $group: { _id: "$type", "tot":{$sum:"$ytd_sales"} } };
 
     Title.aggregate([opGroup], function (err, result) {
@@ -171,6 +171,35 @@ function get_type_by_sales(req, res) {
     });
 }
 
+function get_type_total(req, res) { // get the number of each title in total
+    var o = {};
+    self = this;
+    o.map = function () {
+        price = this.price;
+        if (this.Sales)
+            for (i = 0; i < this.Sales.length; i++) {
+                sale = this.Sales[i];
+                emit(this.type , sale.qty);
+            }
+    };
+
+    o.reduce = function (key, values) {
+        total = 0;
+        for (i = 0; i < values.length; i++) {
+            total += values[i];
+        }
+        return { "tot": total };
+    };
+    o.out = { inline: 1 };
+    o.verbose = true;
+
+    Title.mapReduce(o, function (err, result) {
+        if (err) {
+            console.log(err);
+        }
+        res.status(200).json(result);
+    });
+}
 
 exports.get_titles = get_titles;
 exports.get_book_per_author = get_book_per_author;
@@ -180,3 +209,4 @@ exports.get_sales_per_publisher = get_sales_per_publisher;
 exports.get_list_employees = get_list_employees;
 exports.get_range_per_author = get_range_per_author;
 exports.get_type_by_sales = get_type_by_sales;
+exports.get_type_total = get_type_total;
