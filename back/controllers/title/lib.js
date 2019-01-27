@@ -123,7 +123,6 @@ function get_range_per_author(req, res){ // 2 get the book price range for each 
 function get_list_employees(req, res){
     opProject1 = {$project: {"title":1, "title_id":1, "pub_id":1}};
 
-    
     opLookUp1 = 
         { $lookup:
         {
