@@ -15,6 +15,18 @@ class Analyst1 extends Component {
     localStorage.setItem("title", "Analyst");
   }
 
+  componentDidMount() {
+    this.init();
+  }
+
+  init() { // récupération de toutes les données
+    API.get_authors().then((data) => { console.log(data.data); this.setState({ authors: data.data }) });
+    API.get_employees().then((data) => { console.log(data.data); this.setState({ employees: data.data }) });
+    API.get_publishers().then((data) => { console.log(data.data); this.setState({ publishers: data.data }) });
+    API.get_stores().then((data) => { console.log(data.data); this.setState({ stores: data.data }) });
+    API.get_titles().then((data) => { console.log(data.data); this.setState({ titles: data.data }) });
+  }
+
   render() {
     const {data} = this.state
     return (

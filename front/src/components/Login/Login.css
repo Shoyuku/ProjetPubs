@@ -33,4 +33,15 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment:fixed; 
+    position: absolute;
+}
+
+.login-content-button{
+  display: flex;
+  flex-direction: column;
+}
+
+.login-button{
+  padding:10px;
+  flex:1;
 }

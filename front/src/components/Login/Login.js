@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './Login.css';
+import { Button } from '@material-ui/core';
+import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 class Login extends Component {
 
@@ -27,9 +29,15 @@ class Login extends Component {
         }
     }
 
+    redirectTo = (path) => {
+        this.props.history.push(path);
+    }
+
     render() {
         const { username } = this.state;
         return (
+            <div className="login">
+                
             <div className="container">
                 <div className="card card-login mx-auto mt-5">
                     <div className="card-header">Login</div>
@@ -40,15 +48,16 @@ class Login extends Component {
                                     <input id="inputEmail" className="form-control" placeholder="Username" required="required" autoFocus="autofocus" value={username} onChange={this.handleChangeEvent("username")} />
                                 </div>
                             </div>
-                            <div className="form-group">
-                                <div className="form-label-group">
-                                    <input type="password" id="inputPassword" className="form-control" placeholder="Password"/>
-                                </div>
-                            </div>
                             <button className="btn btn-primary btn-block" type="submit">Login</button>
                         </form>
+                        <div className = "login-content-button">
+                            <Button className="login-button" variant="contained" color="primary" onClick={() => this.redirectTo("/mainpage/admin/all")}>Admin</Button>
+                            <Button className="login-button" variant="contained" color="secondary" onClick={() => this.redirectTo("/mainpage/analyst/all")}>Analyst</Button>
+                            <Button className="login-button" variant="contained" color="primary" onClick={() => this.redirectTo("/mainpage/user/all")}>User</Button>
+                        </div>
                     </div>
                 </div>
+            </div>
             </div>
         );
     }

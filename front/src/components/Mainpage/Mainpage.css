@@ -1,6 +1,7 @@
 .mainpage{
     display: flex;
     flex-direction: column;
+    height:100%;
 }
 
 .mainpage-bandeau{
@@ -9,11 +10,12 @@
 }
 
 .mainpage-content{
-    flex:0;
+    flex:0 1 auto;
     display: flex;
     height:100%;
 }
 
 .mainpage-content-main{
+    height:100%;
     width:100%;
 }

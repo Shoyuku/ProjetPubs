@@ -29,9 +29,7 @@ class Mainpage extends Component {
                     <Bandeau history={this.props.history}></Bandeau>
                 </div>
                 <div className="mainpage-content">
-                    <div>
                         <Sidebar/>
-                    </div>
                     <div className="mainpage-content-main">
                         <Switch history={this.props.history}>
                             <Route path={`${this.props.match.url}/admin`} component={Admin} />
