@@ -120,9 +120,35 @@ function get_range_per_author(req, res){ // 2 get the book price range for each 
     // Missing the aggregate with the lookup operation, for getting the information about the author
 }
 
+function get_list_employees(req, res){
+    opProject1 = {$project: {"title":1, "title_id":1, "pub_id":1}};
+
+    opLookUp =  
+        { $lookup:
+        {
+            from: 'employees',
+            localField: 'pub.id',
+            foreignField: 'pub.id',
+            as: 'list_employees'
+        }
+        };
+        
+    opProject2 = {$project: {"title":1, "title_id":1, "pub_id":1, 
+        "list_employees.emp_id":1, 
+        "list_employees.fname":1, 
+        "list_employees.lname":1,
+        "list_employees.Jobs.job_id":1, 
+        "list_employees.Jobs.job_desc":1}};
+        
+    Title.aggregate([opProject1, opLookUp, opProject2], function(err, result){
+        res.status(200).json(result)
+    });
+}
+
 exports.get_titles = get_titles;
 exports.get_book_per_author = get_book_per_author;
 exports.get_book_sales_per_author = get_book_sales_per_author;
 exports.get_sales_per_book = get_sales_per_book;
 exports.get_sales_per_publisher = get_sales_per_publisher;
 exports.get_range_per_author = get_range_per_author;
+exports.get_list_employees = get_list_employees;
