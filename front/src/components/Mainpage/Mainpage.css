@@ -1,0 +1,19 @@
+.mainpage{
+    display: flex;
+    flex-direction: column;
+}
+
+.mainpage-bandeau{
+    flex:0 1 auto;
+    min-height: 64px;
+}
+
+.mainpage-content{
+    flex:0;
+    display: flex;
+    height:100%;
+}
+
+.mainpage-content-main{
+    width:100%;
+}

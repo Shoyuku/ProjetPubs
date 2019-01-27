@@ -1,0 +1,12 @@
+.bandeau{
+    position: fixed!important;
+    top:0;
+}
+
+.bandeau-inside{
+    display:flex;
+}
+
+.bandeau-title{
+    flex:1;
+}
