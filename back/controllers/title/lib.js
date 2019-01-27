@@ -45,7 +45,8 @@ function get_book_per_author(req, res) { // 2 get all books by author
             }
         };
     opProject = { $project: { "title": 1, "type": 1, "price": 1, "notes": 1, "author": 1 } };
-    Title.aggregate([opUnwind, opLookUp, opProject], function (err, titles) {
+    opSort = { $sort: {"author.au_fname":1}}
+    Title.aggregate([opUnwind, opLookUp, opProject, opSort], function (err, titles) {
         res.status(200).json(titles)
     })
 }
