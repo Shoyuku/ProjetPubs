@@ -20,9 +20,8 @@ class User3 extends Component {
     }
 
     init() { // récupération de toutes les données
-        API.get_sales_per_book().then((data) => { this.setState({data:data.data}) });
+        API.get_sales_per_book().then((data) => { this.setState({ data: data.data }) });
     }
-
 
     render() {
         const { data } = this.state;

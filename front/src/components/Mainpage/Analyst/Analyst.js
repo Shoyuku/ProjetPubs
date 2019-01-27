@@ -4,6 +4,7 @@ import Analyst1 from './Analyst1';
 import Analyst2 from './Analyst2';
 import API from '../../../utils/API.js';
 import AllTables from '../../../utils/AllTables.js';
+import AnalystCharts from './AnalystChart';
 
 class Analyst extends Component {
 
@@ -26,11 +27,11 @@ class Analyst extends Component {
   }
 
   init() { // récupération de toutes les données
-    API.get_authors().then((data) => { console.log(data.data); this.setState({ authors: data.data }) });
-    API.get_employees().then((data) => { console.log(data.data); this.setState({ employees: data.data }) });
-    API.get_publishers().then((data) => { console.log(data.data); this.setState({ publishers: data.data }) });
-    API.get_stores().then((data) => { console.log(data.data); this.setState({ stores: data.data }) });
-    API.get_titles().then((data) => { console.log(data.data); this.setState({ titles: data.data }) });
+    API.get_authors().then((data) => { this.setState({ authors: data.data }) });
+    API.get_employees().then((data) => { this.setState({ employees: data.data }) });
+    API.get_publishers().then((data) => { this.setState({ publishers: data.data }) });
+    API.get_stores().then((data) => { this.setState({ stores: data.data }) });
+    API.get_titles().then((data) => { this.setState({ titles: data.data }) });
   }
 
   render() {
@@ -40,6 +41,7 @@ class Analyst extends Component {
         <div id="wrapper">
           <Switch>
             <Route path={`${this.props.match.url}/all`} render={() => <AllTables authors={authors} employees={employees} publishers={publishers} stores={stores} titles={titles}/>}/>
+            <Route path={`${this.props.match.url}/charts`}  render={() => <AnalystCharts />}/>
             <Route path={`${this.props.match.url}/1`}  render={() => <Analyst1 />}/>
             <Route path={`${this.props.match.url}/2`}  render={() => <Analyst2 />}/>
           </Switch>

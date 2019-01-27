@@ -23,7 +23,6 @@ class User2 extends Component {
         API.get_book_per_author().then((data) => { this.setState({ data: data.data }) });
     }
 
-
     render() {
         const { data } = this.state;
         return (

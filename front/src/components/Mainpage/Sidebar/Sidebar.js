@@ -9,10 +9,6 @@ import { withRouter } from 'react-router-dom';
 import SidebarItem from '../../../classes/SidebarItem.js'
 import { Button } from '@material-ui/core';
 
-function ListItemLink(props) {
-    return <ListItem button component="a" {...props} />;
-}
-
 class Sidebar extends Component {
 
     state = {
@@ -27,11 +23,12 @@ class Sidebar extends Component {
         let array = [];
         if(path.includes("admin")){
             array.push(new SidebarItem("Informations de base","/mainpage/admin/all"));
-            array.push(new SidebarItem("Graphiques","/mainpage/admin/charts"));
+            array.push(new SidebarItem("Tableau de bord","/mainpage/admin/charts"));
             this.setState({items: array});            
         }
         else if(path.includes("analyst")){
             array.push(new SidebarItem("Informations de base","/mainpage/analyst/all"));
+            array.push(new SidebarItem("Tableau de bord","/mainpage/analyst/charts"));
             array.push(new SidebarItem("Requête 1","/mainpage/analyst/1"));
             array.push(new SidebarItem("Requête 2","/mainpage/analyst/2"));
             this.setState({items: array});
