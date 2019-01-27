@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import ReactTable from "react-table";
+import "react-table/react-table.css";
+import API from '../../../utils/API.js';
 
 class Analyst1 extends Component {
 

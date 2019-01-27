@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import ReactTable from "react-table";
+import "react-table/react-table.css";
+import API from '../../../utils/API.js';
 
 class Analyst2 extends Component {
 
@@ -13,6 +16,7 @@ class Analyst2 extends Component {
   }
 
   render() {
+    const { data } = this.state;
     return (
       <div id="wrapper">
         <h2>Obtenir la tranche de prix d’un livre selon l’auteur, par magasin</h2>
