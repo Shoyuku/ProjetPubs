@@ -21,9 +21,8 @@ class User4 extends Component {
     }
 
     init() { // récupération de toutes les données
-        API.get_sales_per_publishers().then((data) => { this.setState({data:data.data}) });
+        API.get_sales_per_publishers().then((data) => { this.setState({ data: data.data }) });
     }
-
 
     render() {
         const { data } = this.state;

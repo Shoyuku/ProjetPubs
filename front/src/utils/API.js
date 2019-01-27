@@ -52,4 +52,14 @@ export default {
             headers: headers
         })
     },
+    get_list_employees : function() {
+        return axios.get(burl + '/title/get_list_employees',{},{
+            headers: headers
+        })
+    },
+    get_range_per_author : function() {
+        return axios.get(burl + '/title/get_range_per_author',{},{
+            headers: headers
+        })
+    },
 }

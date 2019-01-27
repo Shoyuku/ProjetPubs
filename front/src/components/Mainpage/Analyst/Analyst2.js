@@ -6,6 +6,7 @@ import API from '../../../utils/API.js';
 class Analyst2 extends Component {
 
   state = {
+    authors: [],
     data: []
   }
 
@@ -13,6 +14,30 @@ class Analyst2 extends Component {
     super(props);
     document.title = "Analyst";
     localStorage.setItem("title", "Analyst");
+  }
+
+  componentDidMount() {
+    this.init();    
+  }
+
+  init() { // récupération de toutes les données
+    API.get_authors().then((data) => { this.setState({ authors: data.data }) }).then(() => {
+      API.get_range_per_author().then((data) => { this.setState({ data: data.data.results }); this.setData(); });
+    });
+  }
+
+  setData() { //aggregate ici car un aggregate dans un mapReduce ne fonctionne pas en back
+    const {data, authors} = this.state;
+    let array = [];
+    for(let i of data){
+      let tmp = i;
+      let obj = authors.find(function(ele){
+        return ele.au_id == tmp._id.author.au_id;
+      });
+      tmp._id.author = Object.assign(tmp._id.author, obj);
+      array.push(tmp)
+    }
+    this.setState({data: array});
   }
 
   render() {
@@ -30,23 +55,15 @@ class Analyst2 extends Component {
                   columns: [
                     {
                       Header: "First Name",
-                      accessor: "author.0.au_fname"
+                      accessor: "_id.author.au_fname"
                     },
                     {
                       Header: "Last Name",
-                      accessor: "author.0.au_lname"
-                    },
-                    {
-                      Header: "City",
-                      accessor: "author.0.city"
-                    },
-                    {
-                      Header: "Phone",
-                      accessor: "author.0.phone"
+                      accessor: "_id.author.au_lname"
                     },
                     {
                       Header: "State",
-                      accessor: "author.0.state"
+                      accessor: "_id.author.state"
                     }
                   ]
                 },
@@ -55,15 +72,15 @@ class Analyst2 extends Component {
                   columns: [
                     {
                       Header: "Title",
-                      accessor: "title"
+                      accessor: "_id.title"
                     },
                     {
-                      Header: "Type",
-                      accessor: "type"
+                      Header: "Min Price",
+                      accessor: "value.min"
                     },
                     {
-                      Header: "Price",
-                      accessor: "price"
+                      Header: "Max Price",
+                      accessor: "value.max"
                     }
                   ]
                 }

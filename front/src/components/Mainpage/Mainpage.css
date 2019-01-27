@@ -10,9 +10,8 @@
 }
 
 .mainpage-content{
-    flex:0 1 auto;
+    flex:1 1 auto;
     display: flex;
-    height:100%;
 }
 
 .mainpage-content-main{

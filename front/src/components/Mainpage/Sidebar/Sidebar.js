@@ -9,10 +9,6 @@ import { withRouter } from 'react-router-dom';
 import SidebarItem from '../../../classes/SidebarItem.js'
 import { Button } from '@material-ui/core';
 
-function ListItemLink(props) {
-    return <ListItem button component="a" {...props} />;
-}
-
 class Sidebar extends Component {
 
     state = {
