@@ -32,7 +32,7 @@ class Analyst2 extends Component {
     for(let i of data){
       let tmp = i;
       let obj = authors.find(function(ele){
-        return ele.au_id == tmp._id.author.au_id;
+        return ele.au_id === tmp._id.author.au_id;
       });
       tmp._id.author = Object.assign(tmp._id.author, obj);
       array.push(tmp)

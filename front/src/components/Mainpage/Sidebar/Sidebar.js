@@ -1,9 +1,4 @@
 import React, { Component } from 'react';
-//import axios from 'axios';
-//import Form from '../Form/Form';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import './Sidebar.css';
 import { withRouter } from 'react-router-dom';
 import SidebarItem from '../../../classes/SidebarItem.js'

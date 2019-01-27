@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import AllTables from '../../../utils/AllTables';
 import API from '../../../utils/API.js';
 import User1 from './User1.js'
 import User2 from './User2.js'
 import User3 from './User3.js'
 import User4 from './User4.js'
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import TableAuthors from '../../../utils/tables/TableAuthors';
 import TablePublishers from '../../../utils/tables/TablePublishers';
 import TableStores from '../../../utils/tables/TableStores';
@@ -15,7 +14,6 @@ class User extends Component {
 
   state = {
     authors: [],
-    employees: [],
     publishers: [],
     stores: [],
     titles: []
@@ -33,7 +31,6 @@ class User extends Component {
 
   init() { // récupération de toutes les données
     API.get_authors().then((data) => { this.setState({ authors: data.data }) });
-    API.get_employees().then((data) => { this.setState({ employees: data.data }) });
     API.get_publishers().then((data) => { this.setState({ publishers: data.data }) });
     API.get_stores().then((data) => { this.setState({ stores: data.data }) });
     API.get_titles().then((data) => { this.setState({ titles: data.data }) });
@@ -41,7 +38,7 @@ class User extends Component {
 
 
   render() {
-    const { authors, employees, publishers, stores, titles } = this.state;
+    const { authors,  publishers, stores, titles } = this.state;
     return (
       <div>
 

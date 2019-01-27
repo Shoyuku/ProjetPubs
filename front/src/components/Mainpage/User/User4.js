@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AllTables from '../../../utils/AllTables';
 import API from '../../../utils/API.js';
 import ReactTable from "react-table";
 import "react-table/react-table.css";

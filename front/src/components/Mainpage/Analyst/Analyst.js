@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Analyst1 from './Analyst1';
 import Analyst2 from './Analyst2';
 import API from '../../../utils/API.js';

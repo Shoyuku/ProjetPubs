@@ -2,21 +2,6 @@ import React, { Component } from 'react';
 
 class Charts extends Component {
 
-  state = {
-    authors: [],
-    employees: [],
-    publishers: [],
-    stores: [],
-    titles: []
-  }
-
-  constructor(props) {
-    super(props);
-  }
-
-  init() { 
-  }  
-
   render() {
     return (
       <div>
